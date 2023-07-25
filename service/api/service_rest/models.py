@@ -11,7 +11,7 @@ class Technician(models.Model):
     employee_id = models.CharField(max_length=100, unique=True)
 
     def get_api_url(self):
-        return reverse("show_technician", kwargs={"pk": self.id})
+        return reverse("api_technician", kwargs={"employee_id": self.employee_id})
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -30,7 +30,7 @@ class Appointment(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("show_appointment", kwargs={"pk": self.id})
+        return reverse("api_appointment", kwargs={"vin": self.vin})
 
     def __str__(self):
-        return self.customer
+        return self.vin
