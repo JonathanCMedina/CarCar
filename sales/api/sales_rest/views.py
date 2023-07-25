@@ -3,13 +3,17 @@ from .models import Sale, Salesperson, AutomobileVO, Customer
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
-from sales_rest.encoders import AutomobileVOEncoder, SalespersonEncoder, CustomerEncoder, SaleEncoder
+from sales_rest.encoders import (
+    AutomobileVOEncoder,
+    SalespersonEncoder,
+    CustomerEncoder,
+    SaleEncoder)
 
 
 # Create your views here.
 
 @require_http_methods(["GET", "POST"])
-def list_salespeople_view(request):
+def api_list_salespeople(request):
     if request.method == "GET":
         salespeople = Salesperson.objects.all()
         return JsonResponse(
@@ -26,14 +30,14 @@ def list_salespeople_view(request):
         )
 
 @require_http_methods(["DELETE"])
-def delete_salesperson(request, pk):
+def api_delete_salesperson(request, pk):
     if request.method == "DELETE":
         count, _ = Salesperson.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
 
 @require_http_methods(["GET", "POST"])
-def list_customers_view(request):
+def api_list_customers(request):
     if request.method == "GET":
         customers = Customer.objects.all()
         return JsonResponse(
@@ -50,14 +54,14 @@ def list_customers_view(request):
         )
 
 @require_http_methods(["DELETE"])
-def delete_customer(request, pk):
+def api_delete_customer(request, pk):
     if request.method == "DELETE":
         count, _ = Customer.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
 
 @require_http_methods(["GET", "POST"])
-def list_sales_view(request):
+def api_list_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
         return JsonResponse(
@@ -74,7 +78,7 @@ def list_sales_view(request):
         )
 
 @require_http_methods(["DELETE"])
-def delete_sale(request, pk):
+def api_delete_sale(request, pk):
     if request.method == "DELETE":
         count, _ = Sale.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
