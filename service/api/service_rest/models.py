@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 class AutomobileVO(models.Model):
+    href = models.CharField(max_length=255, unique=True, null=True)
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
 
@@ -11,7 +12,7 @@ class Technician(models.Model):
     employee_id = models.CharField(max_length=100, unique=True)
 
     def get_api_url(self):
-        return reverse("api_technician", kwargs={"employee_id": self.id})
+        return reverse("api_technician", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -19,7 +20,7 @@ class Technician(models.Model):
 class Appointment(models.Model):
     date_time = models.DateTimeField(null=True)
     reason = models.TextField(null=True)
-    status = models.BooleanField(default=False)
+    status = models.CharField(max_length=10, default="Active")
     vin = models.CharField(max_length=17, unique=True)
     customer = models.CharField(max_length=100)
     technician = models.ForeignKey(

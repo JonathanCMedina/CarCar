@@ -120,3 +120,59 @@ def api_appointments(request):
             )
             response.status_code = 400
             return response
+
+@require_http_methods(["DELETE", "GET"])
+def api_appointment(request, pk):
+    if request.method == "GET":
+        try:
+            appointment = Appointment.objects.get(id=pk)
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False,
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    else:
+        try:
+            appointment = Appointment.objects.get(id=pk)
+            appointment.delete()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False,
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+
+@require_http_methods(["PUT"])
+def api_cancel_appointment(request, pk):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=pk)
+        except Appointment.DoesNotExist:
+            return JsonResponse({"message": "Appointment does not exist"})
+        appointment.status = "Canceled"
+        appointment.save()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentEncoder,
+            safe=False,
+        )
+
+@require_http_methods(["PUT"])
+def api_finish_appointment(request, pk):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=pk)
+        except Appointment.DoesNotExist:
+            return JsonResponse({"message": "Appointment does not exist"})
+        appointment.status = "Finished"
+        appointment.save()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentEncoder,
+            safe=False,
+        )
