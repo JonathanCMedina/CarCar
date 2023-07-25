@@ -14,11 +14,11 @@ class Technician(models.Model):
         return reverse("show_technician", kwargs={"pk": self.id})
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField
-    reason = models.TextField
+    date_time = models.DateTimeField(null=True)
+    reason = models.TextField(null=True)
     status = models.BooleanField(default=False)
     vin = models.CharField(max_length=17, unique=True)
     customer = models.CharField(max_length=100)
@@ -33,4 +33,4 @@ class Appointment(models.Model):
         return reverse("show_appointment", kwargs={"pk": self.id})
 
     def __str__(self):
-        return self.name
+        return self.customer
