@@ -8,11 +8,12 @@ import json
 # Create your views here.
 class TechnicianEncoder(ModelEncoder):
     model = Technician
-    properties = ["first_name", "last_name", "employee_id"]
+    properties = ["id", "first_name", "last_name", "employee_id"]
 
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
         "date_time",
         "reason",
         "status",
@@ -49,10 +50,10 @@ def api_technicians(request):
             return response
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def api_technician(request, employee_id):
+def api_technician(request, pk):
     if request.method == "GET":
         try:
-            technician = Technician.objects.get(id=employee_id)
+            technician = Technician.objects.get(id=pk)
             return JsonResponse(
                 technician,
                 encoder=TechnicianEncoder,
@@ -64,7 +65,7 @@ def api_technician(request, employee_id):
             return response
     elif request.method == "DELETE":
         try:
-            technician = Technician.objects.get(id=employee_id)
+            technician = Technician.objects.get(id=pk)
             technician.delete()
             return JsonResponse(
                 technician,
@@ -72,11 +73,11 @@ def api_technician(request, employee_id):
                 safe=False,
             )
         except Technician.DoesNotExist:
-            return JsonResponse("message": "Does not exist")
+            return JsonResponse({"message": "Does not exist"})
     else:
         try:
             content = json.loads(request.body)
-            technician = Technician.objects.get(id=employee_id)
+            technician = Technician.objects.get(id=pk)
 
             props = ["employee_id"]
             for prop in props:
@@ -104,9 +105,9 @@ def api_appointments(request):
     else:
         try:
             content = json.loads(request.body)
-            employee_id = content["employee_id"]
-            employee = Technician.objects.get(id=employee_id)
-            content["employee"] = employee
+            technician_id = content["technician_id"]
+            technician = Technician.objects.get(id=technician_id)
+            content["technician"] = technician
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,
