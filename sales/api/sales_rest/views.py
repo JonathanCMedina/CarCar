@@ -70,12 +70,41 @@ def api_list_sales(request):
         )
     else:
         content = json.loads(request.body)
-        sale = Sale.objects.create(**content)
-        return JsonResponse(
-            sale,
-            encoder=SaleEncoder,
-            safe=False,
-        )
+        try:
+            automobile_id = content['automobile']
+            salesperson_id = content['salesperson']
+            customer_id = content['customer']
+
+            automobile = AutomobileVO.objects.get(id=automobile_id)
+            salesperson = Salesperson.objects.get(id=salesperson_id)
+            customer = Customer.objects.get(id=customer_id)
+
+            content['automobile'] = automobile
+            content['salesperson'] = salesperson
+            content['customer'] = customer
+
+            sale = Sale.objects.create(**content)
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False,
+            )
+
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {'message': 'This automobile does not exist'},
+                status=400
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {'message': 'This salesperson does not exist'},
+                status=400
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {'message': 'This customer does not exist'},
+                status=400
+            )
 
 @require_http_methods(["DELETE"])
 def api_delete_sale(request, pk):
