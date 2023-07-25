@@ -4,28 +4,40 @@ from .models import Sale, Salesperson, AutomobileVO, Customer
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "id", "vin", "sold"
+        "id",
+        "vin",
+        "sold"
     ]
 
 
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
     properties = [
-        "id", "first_name", "last_name", "employee_id"
+        "id",
+        "first_name",
+        "last_name",
+        "employee_id"
     ]
 
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = [
-        "id", "first_name", "last_name", "address", "phone_number"
+        "id",
+        "first_name",
+        "last_name",
+        "address",
+        "phone_number"
     ]
 
 
 class SaleEncoder(ModelEncoder):
     model = Sale
     properties = [
-        "price"
+        "price",
+        "automobile",
+        "salesperson",
+        "customer",
     ]
     encoders = {
         "automobile": AutomobileVOEncoder(),
