@@ -79,7 +79,7 @@ def api_technician(request, pk):
             content = json.loads(request.body)
             technician = Technician.objects.get(id=pk)
 
-            props = ["employee_id"]
+            props = ["first_name", "last_name", "employee_id"]
             for prop in props:
                 if prop in content:
                     setattr(technician, prop, content[prop])
