@@ -4,6 +4,8 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './ManufacturerList';
 import ModelList from './ModelList';
+import ManufacturerForm from './ManufacturerForm';
+import ModelForm from './ModelForm';
 
 
 function App()
@@ -42,7 +44,7 @@ function App()
   {
     getManufacturers();
     getModels();
-  })
+  }, []);
 
   return (
     <BrowserRouter>
@@ -52,9 +54,11 @@ function App()
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers/">
             <Route index element={<ManufacturerList manufacturers={manufacturers} />} />
+            <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers} />} />
           </Route>
           <Route path="models/">
             <Route index element={<ModelList models={models} />} />
+            <Route path="new" element={<ModelForm getModels={getModels} />} />
           </Route>
         </Routes>
       </div>
