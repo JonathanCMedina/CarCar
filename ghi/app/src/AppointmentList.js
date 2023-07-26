@@ -79,7 +79,7 @@ function AppointmentList({ appointments })
                 <thead>
                     <tr>
                         <th>VIN</th>
-                        {/* <th>Is VIP?</th> */}
+                        <th>Is VIP?</th>
                         <th>Customer</th>
                         <th>Date</th>
                         <th>Time</th>
@@ -91,12 +91,12 @@ function AppointmentList({ appointments })
                 <tbody>
                     {appointments.map(appointment =>
                     {
-                        if (appointment.status === "Active")
+                        if (appointment.status === "created")
                         {
                             return (
                                 <tr className="align-middle" key={appointment.id}>
                                     <td>{appointment.vin}</td>
-                                    {/* <td>{appointment.vip}</td> */}
+                                    <td>{appointment.vip ? "Yes" : "No"}</td>
                                     <td>{appointment.customer}</td>
                                     <td>{formatDate(appointment.date_time)}</td>
                                     <td>{formatTime(appointment.date_time)}</td>
