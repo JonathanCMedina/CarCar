@@ -6,6 +6,10 @@ from common.json import ModelEncoder
 import json
 
 # Create your views here.
+class AutomibileVOEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = ["id", "href", "vin", "sold"]
+
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = ["id", "first_name", "last_name", "employee_id"]
@@ -20,6 +24,8 @@ class AppointmentEncoder(ModelEncoder):
         "vin",
         "customer",
         "technician",
+        "vip",
+        "sold",
     ]
     encoders = {
         "technician": TechnicianEncoder(),
@@ -110,6 +116,18 @@ def api_appointments(request):
             technician_id = content["technician_id"]
             technician = Technician.objects.get(id=technician_id)
             content["technician"] = technician
+
+            try:
+                automobile_vo = AutomobileVO.objects.get(vin=content["vin"])
+                content["sold"] = automobile_vo.sold
+                if automobile_vo.sold is True:
+                    content["vip"] = True
+                else:
+                    content["vip"] = False
+            except AutomobileVO.DoesNotExist:
+                content["sold"] = False
+                content["vip"] = False
+
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,

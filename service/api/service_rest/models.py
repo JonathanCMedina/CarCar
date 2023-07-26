@@ -6,6 +6,9 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.vin
+
 class Technician(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -20,9 +23,11 @@ class Technician(models.Model):
 class Appointment(models.Model):
     date_time = models.DateTimeField(null=True)
     reason = models.TextField(null=True)
-    status = models.CharField(max_length=10, default="Active")
-    vin = models.CharField(max_length=17, unique=True)
+    status = models.CharField(max_length=10, default="created")
+    vin = models.CharField(max_length=17, unique=False) # Might need to change to false
     customer = models.CharField(max_length=100)
+    vip = models.BooleanField(default=False)
+    sold = models.BooleanField(default=False)
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
