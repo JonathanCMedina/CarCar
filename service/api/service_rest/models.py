@@ -26,6 +26,8 @@ class Appointment(models.Model):
     status = models.CharField(max_length=10, default="created")
     vin = models.CharField(max_length=17, unique=False) # Might need to change to false
     customer = models.CharField(max_length=100)
+    vip = models.BooleanField(default=False)
+    sold = models.BooleanField(default=False)
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
