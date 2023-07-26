@@ -76,7 +76,7 @@ function ModelForm({ getModels })
                         </div>
                         <div className="form-floating mb-3">
                             <input onChange={handleUrlChange} placeholder="Picture URL..." required type="text" name="url" id="url" className="form-control" value={url} />
-                            <label htmlFor="url">Url</label>
+                            <label htmlFor="url">Picture URL</label>
                         </div>
                         <div className="mb-3">
                             <select

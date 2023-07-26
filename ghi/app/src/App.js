@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import SalesList from './SalesList';
 import ManufacturerList from './ManufacturerList';
 import ModelList from './ModelList';
 import ManufacturerForm from './ManufacturerForm';
@@ -14,7 +13,12 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentList from './AppointmentList';
 import AppointmentListHistory from './AppointmentListHistory';
 import AppointmentForm from './AppointmentForm';
-
+import SalespeopleList from './SalespeopleList';
+import SalespersonForm from './SalespersonForm';
+import CustomerList from './CustomerList';
+import CustomerForm from './CustomerForm';
+import SalesList from './SalesList';
+import SaleForm from './SaleForm';
 
 
 function App()
@@ -24,6 +28,9 @@ function App()
   const [autos, setAutos] = useState([]);
   const [technicians, setTechnicians] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [salespeople, setSalesperson] = useState([]);
+  const [customers, setCustomer] = useState([]);
+  const [sales, setSales] = useState([]);
 
   async function getManufacturers()
   {
@@ -91,6 +98,39 @@ function App()
     }
   }
 
+  async function fetchSaleList() {
+      const response = await fetch('http://localhost:8090/api/sales/');
+      // if (!response.ok){
+      //     setSales([]);
+      //     return;
+      // }
+      if (response.ok) {
+      const saleListData = await response.json();
+      setSales(saleListData.sales)
+      } else {
+        console.error('Error fetching sale list data')
+      }
+  }
+  async function fetchSalespeople() {
+    const response = await fetch('http://localhost:8090/api/salespeople/');
+    if (response.ok){
+      const salespersonListData = await response.json();
+      setSalesperson(salespersonListData.salespeople)
+    } else {
+      console.error('Error fetching salespeople data')
+    }
+  }
+  async function fetchCustomers() {
+    const response = await fetch('http://localhost:8090/api/customers/');
+    if (response.ok){
+      const customerListData = await response.json();
+      setCustomer(customerListData.customers)
+    } else {
+      console.error('Error fetching customer data')
+    }
+    }
+
+
   useEffect(() =>
   {
     getManufacturers();
@@ -98,6 +138,9 @@ function App()
     getAutos();
     getTechnicians();
     getAppointments();
+    fetchSalespeople();
+    fetchSaleList();
+    fetchCustomers();
   }, []);
 
   return (
@@ -106,8 +149,6 @@ function App()
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="sales/"/>
-            <Route index element={<SalesList />} />
           <Route path="manufacturers/">
             <Route index element={<ManufacturerList manufacturers={manufacturers} />} />
             <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers} />} />
@@ -128,6 +169,18 @@ function App()
             <Route index element={<AppointmentList appointments={appointments} />} />
             <Route path="new" element={<AppointmentForm getAppointments={getAppointments} />} />
             <Route path="history" element={<AppointmentListHistory appointments={appointments} />} />
+          </Route>
+          <Route path="salespeople/">
+            <Route index element={<SalespeopleList salespeople={salespeople} />} />
+            <Route path="new" element={<SalespersonForm fetchSalespeople={fetchSalespeople} />} />
+          </Route>
+          <Route path="customers/">
+            <Route index element={<CustomerList customers={customers} />} />
+            <Route path="new" element={<CustomerForm fetchCustomers={fetchCustomers} />} />
+          </Route>
+          <Route path="sales/">
+            <Route index element={<SalesList sales={sales} />} />
+            <Route path="new" element={<SaleForm fetchSaleList={fetchSaleList} />} />
           </Route>
         </Routes>
       </div>

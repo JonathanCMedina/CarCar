@@ -28,6 +28,7 @@ def poll(repeat=True):
                     vin=automobile['vin'],
                     defaults={
                         'vin': automobile['vin'],
+                        'sold': automobile['sold']
                     }
                 )
         except Exception as e:
