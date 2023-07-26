@@ -22,6 +22,10 @@ function AppointmentListHistory({ appointments })
     return (
         <>
             <h2 className="mt-4">Service History</h2>
+            <div className="input-group mb-3">
+                <input type="text" className="form-control" placeholder="Search by VIN..." />
+                <button className="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -38,21 +42,18 @@ function AppointmentListHistory({ appointments })
                 <tbody>
                     {appointments.map(appointment =>
                     {
-                        if (appointment.status !== "Active")
-                        {
-                            return (
-                                <tr className="align-middle" key={appointment.id}>
-                                    <td>{appointment.vin}</td>
-                                    {/* <td>{appointment.vip}</td> */}
-                                    <td>{appointment.customer}</td>
-                                    <td>{formatDate(appointment.date_time)}</td>
-                                    <td>{formatTime(appointment.date_time)}</td>
-                                    <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
-                                    <td>{appointment.reason}</td>
-                                    <td>{appointment.status}</td>
-                                </tr>
-                            );
-                        }
+                        return (
+                            <tr className="align-middle" key={appointment.id}>
+                                <td>{appointment.vin}</td>
+                                {/* <td>{appointment.vip}</td> */}
+                                <td>{appointment.customer}</td>
+                                <td>{formatDate(appointment.date_time)}</td>
+                                <td>{formatTime(appointment.date_time)}</td>
+                                <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
+                                <td>{appointment.reason}</td>
+                                <td>{appointment.status}</td>
+                            </tr>
+                        );
                     })}
                 </tbody>
             </table>
