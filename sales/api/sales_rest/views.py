@@ -32,7 +32,7 @@ def api_list_salespeople(request):
 @require_http_methods(["DELETE"])
 def api_delete_salesperson(request, pk):
     if request.method == "DELETE":
-        count, _ = Salesperson.objects.filter(id=pk).delete()
+        count, _ = Salesperson.objects.filter(pk=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
 
@@ -56,7 +56,7 @@ def api_list_customers(request):
 @require_http_methods(["DELETE"])
 def api_delete_customer(request, pk):
     if request.method == "DELETE":
-        count, _ = Customer.objects.filter(id=pk).delete()
+        count, _ = Customer.objects.filter(pk=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
 
@@ -71,11 +71,11 @@ def api_list_sales(request):
     else:
         content = json.loads(request.body)
         try:
-            automobile_id = content['automobile']
+            automobile_vin = content['automobile']
             salesperson_id = content['salesperson']
             customer_id = content['customer']
 
-            automobile = AutomobileVO.objects.get(id=automobile_id)
+            automobile = AutomobileVO.objects.get(vin=automobile_vin)
             salesperson = Salesperson.objects.get(id=salesperson_id)
             customer = Customer.objects.get(id=customer_id)
 
@@ -106,8 +106,11 @@ def api_list_sales(request):
                 status=400
             )
 
+
+
+
 @require_http_methods(["DELETE"])
 def api_delete_sale(request, pk):
     if request.method == "DELETE":
-        count, _ = Sale.objects.filter(id=pk).delete()
+        count, _ = Sale.objects.filter(pk=pk).delete()
         return JsonResponse({"deleted": count > 0})
