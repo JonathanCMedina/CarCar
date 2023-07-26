@@ -26,6 +26,32 @@ function AppointmentList({ appointments })
                 console.error('Error occurred while updating appointment status:', error);
             });
     };
+    const handleCancelClick = (appointmentId) =>
+    {
+        const url = `http://localhost:8080/api/appointments/${appointmentId}/cancel/`; // Update the URL to match your backend endpoint
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: "",
+        })
+            .then((response) =>
+            {
+                if (response.ok)
+                {
+                    window.location.reload();
+                } else
+                {
+                    console.error('Failed to modify appointment status');
+                }
+            })
+            .catch((error) =>
+            {
+                console.error('Error occurred while updating appointment status:', error);
+            });
+    };
 
     const formatDate = (dateTime) =>
     {
@@ -79,7 +105,7 @@ function AppointmentList({ appointments })
                                     <td className="text-center">
                                         <div className="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" className="btn btn-success" onClick={() => handleFinishClick(appointment.id)}>Finish</button>
-                                            <button type="button" className="btn btn-danger">Cancel</button>
+                                            <button type="button" className="btn btn-danger" onClick={() => handleCancelClick(appointment.id)}>Cancel</button>
                                         </div>
                                     </td>
                                 </tr>
