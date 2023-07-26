@@ -30,7 +30,7 @@ class Tests(TransactionTestCase):
         self.assertEqual(response.status_code, 200, msg="Did not get a 200 OK for the path projects/")
 
     def test_technician_delete(self):
-        Technician.objects.create(first_name="first", last_name="last", employee_id=1)
+        technician = Technician.objects.create(first_name="first", last_name="last", employee_id=1)
 
         client = Client()
         response = client.delete(f"/api/technicians/{technician.id}/")
@@ -61,7 +61,7 @@ class Tests(TransactionTestCase):
             "reason": "broken glass. everywhere.",
             "vin": "2222",
             "customer": "Warren Longmire",
-            "technician": f"{tech.id}",
+            "technician_id": f"{tech.id}",
         }
 
         response = client.post("/api/appointments/", json.dumps(body), content_type='application/json')

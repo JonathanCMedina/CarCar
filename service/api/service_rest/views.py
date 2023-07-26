@@ -73,7 +73,9 @@ def api_technician(request, pk):
                 safe=False,
             )
         except Technician.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
     else:
         try:
             content = json.loads(request.body)
@@ -100,7 +102,7 @@ def api_appointments(request):
         appointments = Appointment.objects.all()
         return JsonResponse(
             {"appointments": appointments},
-            encoder=AppointmentEncoder
+            encoder=AppointmentEncoder,
         )
     else:
         try:
@@ -116,9 +118,9 @@ def api_appointments(request):
             )
         except:
             response = JsonResponse(
-                {"message": "Could not create the appointment"}
+                {"message": "Could not create appointment"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 @require_http_methods(["DELETE", "GET"])
@@ -145,7 +147,9 @@ def api_appointment(request, pk):
                 safe=False,
             )
         except Appointment.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
 
 @require_http_methods(["PUT"])
 def api_cancel_appointment(request, pk):
@@ -153,8 +157,10 @@ def api_cancel_appointment(request, pk):
         try:
             appointment = Appointment.objects.get(id=pk)
         except Appointment.DoesNotExist:
-            return JsonResponse({"message": "Appointment does not exist"})
-        appointment.status = "Canceled"
+            response = JsonResponse({"message": "Appointment does not exist"})
+            response.status_code = 404
+            return response
+        appointment.status = "canceled"
         appointment.save()
         return JsonResponse(
             appointment,
@@ -169,7 +175,7 @@ def api_finish_appointment(request, pk):
             appointment = Appointment.objects.get(id=pk)
         except Appointment.DoesNotExist:
             return JsonResponse({"message": "Appointment does not exist"})
-        appointment.status = "Finished"
+        appointment.status = "finished"
         appointment.save()
         return JsonResponse(
             appointment,
