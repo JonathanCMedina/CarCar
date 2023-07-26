@@ -32,8 +32,14 @@ def api_list_salespeople(request):
 @require_http_methods(["DELETE"])
 def api_delete_salesperson(request, pk):
     if request.method == "DELETE":
+        # try:
         count, _ = Salesperson.objects.filter(pk=pk).delete()
         return JsonResponse({"deleted": count > 0})
+        # except Salesperson.DoesNotExist:
+        #     return JsonResponse(
+        #         {'message': 'Salesperson does not exist'},
+        #         status=404
+        #         )
 
 
 @require_http_methods(["GET", "POST"])
@@ -70,6 +76,15 @@ def api_list_sales(request):
         )
     else:
         content = json.loads(request.body)
+
+        # sold_status = content['automobile']
+        # automobile_status = AutomobileVO.objects.get(sold=sold_status)
+        # if automobile_status["sold"] == True:
+        #     return JsonResponse(
+        #         {'message': 'This automobile has already been sold! Find another automobile'},
+        #         status=400
+        #     )
+
         try:
             automobile_vin = content['automobile']
             salesperson_id = content['salesperson']
@@ -107,10 +122,18 @@ def api_list_sales(request):
             )
 
 
-
-
 @require_http_methods(["DELETE"])
 def api_delete_sale(request, pk):
-    if request.method == "DELETE":
-        count, _ = Sale.objects.filter(pk=pk).delete()
-        return JsonResponse({"deleted": count > 0})
+    try:
+        sale = Sale.objects.filter(pk=pk)
+        sale.delete()
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
+    except Sale.DoesNotExist:
+        return JsonResponse(
+            {'message': 'Sale does not exist'},
+            status=404
+            )
