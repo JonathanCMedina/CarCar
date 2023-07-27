@@ -60,7 +60,7 @@ function Nav()
               <NavLink className="nav-link" to="/sales"> Sales </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/sales/new"> Add a new Sales </NavLink>
+              <NavLink className="nav-link" to="/sales/new"> Add a new Sale </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/sales/history"> Sales History </NavLink>

@@ -53,7 +53,7 @@ function SalespersonForm({ fetchSalespeople }) {
                         </div>
                         <div className="form-floating mb-3">
                             <input value={lastName} onChange={handleChangeLastName} placeholder="Last Name" required type="text" name="Last Name" id="Last Name" className="form-control"/>
-                            <label htmlFor="Last Name"> LastName </label>
+                            <label htmlFor="Last Name"> Last Name </label>
                         </div>
                         <div className="form-floating mb-3">
                             <input value={employeeId} onChange={handleChangeEmployeeId} placeholder="Employee ID" required type="text" name="Employee ID" id="Employee ID" className="form-control"/>
