@@ -1,9 +1,12 @@
+import { useState, useEffect } from 'react';
+
 function AppointmentListHistory({ appointments })
 {
+    const [searchInput, setSearchInput] = useState('');
+    const [filteredAppointments, setFilteredAppointments] = useState(appointments);
+
     const formatDate = (dateTime) =>
     {
-        // const [search, setSearch]
-
         const options = {
             year: 'numeric',
             month: 'short',
@@ -21,12 +24,30 @@ function AppointmentListHistory({ appointments })
         return new Date(dateTime).toLocaleString(undefined, options);
     };
 
+    useEffect(() =>
+    {
+        // Initialize filteredAppointments with the original appointments on mount
+        setFilteredAppointments(appointments);
+    }, [appointments]);
+
+    const handleSearch = () =>
+    {
+        const filteredAppointments = appointments.filter(appointment =>
+            appointment.vin.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setFilteredAppointments(filteredAppointments);
+    };
+
+
+
+
+
     return (
         <>
             <h2 className="mt-4">Service History</h2>
             <div className="input-group mb-3">
-                <input type="text" className="form-control" placeholder="Search by VIN..." />
-                <button className="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                <input type="text" className="form-control" placeholder="Search by VIN..." value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSearch}>Search</button>
             </div>
             <table className="table table-striped">
                 <thead>
@@ -42,7 +63,7 @@ function AppointmentListHistory({ appointments })
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(appointment =>
+                    {filteredAppointments.map(appointment =>
                     {
                         return (
                             <tr className="align-middle" key={appointment.id}>
