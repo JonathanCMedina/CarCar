@@ -7,7 +7,7 @@ function SaleList({ sales }) {
         <>
             <h2 className="mt-4"> List of Sales </h2>
             <div className="input-group mb-3">
-                <input className="form-control" type="text" placeholder='Search sales history by salesperson' onChange={(event) => setSearch(event.target.value)} />
+                <input className="form-control" type="text" placeholder='Search sales history by salesperson first name' onChange={(event) => setSearch(event.target.value)} />
             </div>
             <table className="table table-striped">
                 <thead>
