@@ -2,6 +2,8 @@ function AppointmentListHistory({ appointments })
 {
     const formatDate = (dateTime) =>
     {
+        // const [search, setSearch]
+
         const options = {
             year: 'numeric',
             month: 'short',
