@@ -26,7 +26,6 @@ function AppointmentListHistory({ appointments })
 
     useEffect(() =>
     {
-        // Initialize filteredAppointments with the original appointments on mount
         setFilteredAppointments(appointments);
     }, [appointments]);
 
@@ -37,10 +36,6 @@ function AppointmentListHistory({ appointments })
         );
         setFilteredAppointments(filteredAppointments);
     };
-
-
-
-
 
     return (
         <>
