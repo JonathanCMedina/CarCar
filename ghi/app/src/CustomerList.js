@@ -6,12 +6,10 @@ function CustomerList ({ customers })
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                            <td> First Name </td>
-                            <td> Last Name </td>
-                            <td> Address </td>
-                            <td> Phone Number </td>
-                        </th>
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Address </th>
+                            <th> Phone Number </th>
                     </tr>
                 </thead>
                 <tbody>

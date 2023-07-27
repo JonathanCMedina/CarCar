@@ -181,7 +181,7 @@ function App()
           </Route>
           <Route path="sales/">
             <Route index element={<SalesList sales={sales} />} />
-            <Route path="new" element={<SaleForm fetchSaleList={fetchSaleList} />} />
+            <Route path="new" element={<SaleForm fetchSaleList={fetchSaleList } getAutos={getAutos} />} />
             <Route path="history" element={<SalespersonHistory appointments={appointments} /> } />
           </Route>
         </Routes>
