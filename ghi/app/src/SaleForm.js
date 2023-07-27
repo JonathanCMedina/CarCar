@@ -27,7 +27,7 @@ function SaleForm({ fetchSales }) {
         };
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok){
-            const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto.vin}/`;
+            const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto}/`;
             const newStatus = {
                 sold: true,
             }
@@ -45,6 +45,7 @@ function SaleForm({ fetchSales }) {
                 setCustomer('');
                 setPrice('');
                 fetchSales();
+                fetchAutos();
             }
         }
 
