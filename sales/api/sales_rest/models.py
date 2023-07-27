@@ -4,7 +4,7 @@ from django.db import models
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=17, unique=False)
+    vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
 
 
@@ -41,3 +41,4 @@ class Sale(models.Model):
         null=True
     )
     price = models.PositiveIntegerField()
+    sold = models.BooleanField(default=False)

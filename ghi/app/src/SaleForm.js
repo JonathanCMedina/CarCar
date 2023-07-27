@@ -17,7 +17,6 @@ function SaleForm({ fetchSales }) {
             customer,
             price,
         };
-        console.log(data)
         const saleUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
             method: 'post',
@@ -32,8 +31,26 @@ function SaleForm({ fetchSales }) {
             setSalesperson('');
             setCustomer('');
             setPrice('');
+            fetchSales();
         }
-    }
+
+        // const updateConfig = {
+        //     method: 'put',
+        //     body: JSON.stringify(data),
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // };
+        // const automobileUpdateUrl = `http://localhost:8100/api/automobiles/${auto}`;
+        // const updateSoldStatus = await fetch(automobileUpdateUrl, updateConfig);
+        // if (updateSoldStatus.ok) {
+        //     const updateAutomobileStatus = await updateSoldStatus.json();
+        // } else {
+        //     console.error("Unable to update sold status")
+        // }
+        }
+
+
     const fetchAutos = async () =>
     {
         const response = await fetch('http://localhost:8100/api/automobiles/');
@@ -84,7 +101,6 @@ function SaleForm({ fetchSales }) {
         const { value } = event.target;
         setPrice(value);
     }
-
     return (
         <div className="row">
             <div className="offset-3 col-6">
@@ -96,13 +112,16 @@ function SaleForm({ fetchSales }) {
                                 <option value="" > Select an unsold automobile </option>
                                     {autos.map(auto =>
                                     {
-                                        if (auto.sold === false)
+                                        if (!auto.sold)
                                         {
                                             return (
                                                 <option key={auto.vin} value={auto.vin} >
                                                     {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
                                                 </option>
-                                            )
+                                            );
+                                        }
+                                        else {
+                                            return null;
                                         }
                                     })}
                             </select>

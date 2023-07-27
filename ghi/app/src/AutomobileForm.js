@@ -76,8 +76,8 @@ function AutomobileForm({ getAutos })
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create a model</h1>
-                    <form onSubmit={handleSubmit} id="add-model-form">
+                    <h1>Create an automobile </h1>
+                    <form onSubmit={handleSubmit} id="add-automobile-form">
                         <div className="form-floating mb-3">
                             <input onChange={handleVinChange} placeholder="VIN..." required type="text" name="vin" id="vin" className="form-control" value={vin} />
                             <label htmlFor="vin">VIN</label>

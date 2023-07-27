@@ -98,6 +98,10 @@ def api_list_sales(request):
             content['salesperson'] = salesperson
             content['customer'] = customer
 
+            automobile_sold = AutomobileVO.objects.get(vin=automobile_vin)
+            content['sold'] = automobile_sold.sold
+            automobile.sold = True
+
             sale = Sale.objects.create(**content)
             return JsonResponse(
                 sale,
