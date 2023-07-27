@@ -27,11 +27,25 @@ function SaleForm({ fetchSales }) {
         };
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok){
-            setAuto('');
-            setSalesperson('');
-            setCustomer('');
-            setPrice('');
-            fetchSales();
+            const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto.vin}/`;
+            const newStatus = {
+                sold: true,
+            }
+            const updateConfig = {
+                method: 'put',
+                body: JSON.stringify(newStatus),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+            const res = await fetch(updateSoldStatus, updateConfig);
+            if (res.ok){
+                setAuto('');
+                setSalesperson('');
+                setCustomer('');
+                setPrice('');
+                fetchSales();
+            }
         }
 
         // const updateConfig = {

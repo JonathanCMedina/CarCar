@@ -41,4 +41,4 @@ class Sale(models.Model):
         null=True
     )
     price = models.PositiveIntegerField()
-    sold = models.BooleanField(default=False)
+    # sold = models.BooleanField(default=True)
