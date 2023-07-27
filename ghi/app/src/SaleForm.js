@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SaleForm({ fetchSales }) {
+function SaleForm({ fetchSaleList }) {
     const [auto, setAuto] = useState('');
     const [autos, setAutos] = useState([]);
     const [salesperson, setSalesperson] = useState('');
@@ -8,6 +8,23 @@ function SaleForm({ fetchSales }) {
     const [customer, setCustomer] = useState('');
     const [customers, setCustomers] = useState([]);
     const [price, setPrice] = useState('')
+
+    function handleAutoChange(event){
+        const { value } = event.target;
+        setAuto(value);
+    };
+    function handleSalespersonChange(event){
+        const { value } = event.target;
+        setSalesperson(value);
+    };
+    function handleCustomerChange(event){
+        const { value } = event.target;
+        setCustomer(value);
+    };
+    function handlePriceChange(event){
+        const { value } = event.target;
+        setPrice(value);
+    }
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -25,29 +42,35 @@ function SaleForm({ fetchSales }) {
                 'Content-Type': 'application/json',
             },
         };
+        const automobileUrl = `http://localhost:8100/api/automobiles/${auto}/`;
+        const updateConfig = {
+            method: 'put',
+            body: JSON.stringify({ sold: true }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        const res = await fetch(automobileUrl, updateConfig);
+        if (res.ok) {
+            console.log('it works!')
+        } else {
+            console.error('try again noob')
+        }
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok){
-            const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto}/`;
-            const newStatus = {
-                sold: true,
-            }
-            const updateConfig = {
-                method: 'put',
-                body: JSON.stringify(newStatus),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }
-            const res = await fetch(updateSoldStatus, updateConfig);
-            if (res.ok){
                 setAuto('');
                 setSalesperson('');
                 setCustomer('');
                 setPrice('');
-                fetchSales();
+                fetchSaleList();
                 fetchAutos();
             }
         }
+
+        // const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto}/`;
+        // const newStatus = {
+        //     sold: true,
+        // }
 
         // const updateConfig = {
         //     method: 'put',
@@ -63,7 +86,7 @@ function SaleForm({ fetchSales }) {
         // } else {
         //     console.error("Unable to update sold status")
         // }
-        }
+
 
 
     const fetchAutos = async () =>
@@ -100,22 +123,7 @@ function SaleForm({ fetchSales }) {
         fetchSalespeople();
     }, []);
 
-    function handleAutoChange(event){
-        const { value } = event.target;
-        setAuto(value);
-    };
-    function handleSalespersonChange(event){
-        const { value } = event.target;
-        setSalesperson(value);
-    };
-    function handleCustomerChange(event){
-        const { value } = event.target;
-        setCustomer(value);
-    };
-    function handlePriceChange(event){
-        const { value } = event.target;
-        setPrice(value);
-    }
+
     return (
         <div className="row">
             <div className="offset-3 col-6">
