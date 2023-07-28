@@ -6,7 +6,7 @@ Team:
 * Jonathan Ceasar Medina(@Jonathan.C.Medina on Gitlab) - Sales Microservice
 
 ## Vision of the project
-Project Beta (CarCar) is developed to emulate a car dealership website. This project uses three miroservices (Inventory, Sales, and Service) with interactivity between each.
+Project Beta (CarCar) is developed to emulate a car dealership website. This project uses three microservices (Inventory, Sales, and Service) with interactivity between each.
 Within each microservice, there are functions used to create and retrieve information on the back-end and the front-end. 
 available in the inventory, as well as vehicles sold from the inventory. 
 
