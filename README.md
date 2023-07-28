@@ -2,8 +2,8 @@
 
 Team:
 
-* Gabe Svetcos - Service Microservice
-* Jonathan Ceasar Medina - Sales Microservice
+* Gabe Svetcos (@Gsvetcos on GitLab) - Service Microservice
+* Jonathan Ceasar Medina(@Jonathan.C.Medina on Gitlab) - Sales Microservice
 
 ## Vision of the project
 Project Beta (CarCar) is developed to emulate a car dealership website. This project uses three miroservices (Inventory, Sales, and Service) with interactivity between each.
@@ -37,7 +37,7 @@ For testing purposes, please begin by creating a new manufacturer, then a new mo
 The structure of the API Documentation should guide you step-by-step on what needs to be created before proceeding with either scheduling a service appointment or making a new sale. 
 
 ## Diagram
-- Insert Excalidraw diagram here
+![Gabe and JC's DDD Diagram of Project Beta / CarCar!](images/design-diagram.png "DDD Diagram of Project Beta / CarCar")
 
 ## API Documentation
 ### React/Frontend URL Paths and use description for Inventory Microservice
