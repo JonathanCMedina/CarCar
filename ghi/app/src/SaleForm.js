@@ -50,12 +50,8 @@ function SaleForm({ fetchSaleList }) {
                 'Content-Type': 'application/json',
             }
         };
-        const res = await fetch(automobileUrl, updateConfig);
-        if (res.ok) {
-            console.log('it works!')
-        } else {
-            console.error('try again noob')
-        }
+
+
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok){
                 setAuto('');
@@ -65,6 +61,7 @@ function SaleForm({ fetchSaleList }) {
                 fetchSaleList();
                 fetchAutos();
             }
+        await fetch(automobileUrl, updateConfig);
         }
 
         // const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto}/`;
