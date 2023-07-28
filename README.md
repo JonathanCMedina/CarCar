@@ -30,7 +30,7 @@ Front-end is presented through a SPA(single-page application) using React. Boots
     * `docker volume create beta-data`
     * `docker-compose build`
     * `docker-compose up`
-
+Please feel free to start with http://localhost:3000. You will be met with the main page of CarCar.
 ### Additional Information
 The server should be running so you will have access to the React URLs in the front end (the links starting with http://localhost:3000/), as well as the backend URLs (the links starting with http://localhost:8100/api/ http://localhost:8080/api/ http://localhost:8090/api/). A full list of URLs will be in the API Documentation section.
 For testing purposes, please begin by creating a new manufacturer, then a new model, then a new automobile. 
