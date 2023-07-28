@@ -56,13 +56,7 @@ function SaleForm({ fetchSaleList, getAutos, autos })
             }
         };
         const res = await fetch(automobileUrl, updateConfig);
-        if (res.ok)
-        {
-            console.log('it works!')
-        } else
-        {
-            console.error('try again noob')
-        }
+
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok)
         {
