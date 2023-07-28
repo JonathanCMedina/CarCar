@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react';
 
-function SaleForm({ fetchSaleList }) {
+function SaleForm({ fetchSaleList, getAutos, autos })
+{
     const [auto, setAuto] = useState('');
-    const [autos, setAutos] = useState([]);
     const [salesperson, setSalesperson] = useState('');
     const [salespeople, setSalespeople] = useState([]);
     const [customer, setCustomer] = useState('');
     const [customers, setCustomers] = useState([]);
     const [price, setPrice] = useState('')
 
-    function handleAutoChange(event){
+    function handleAutoChange(event)
+    {
         const { value } = event.target;
         setAuto(value);
     };
-    function handleSalespersonChange(event){
+    function handleSalespersonChange(event)
+    {
         const { value } = event.target;
         setSalesperson(value);
     };
-    function handleCustomerChange(event){
+    function handleCustomerChange(event)
+    {
         const { value } = event.target;
         setCustomer(value);
     };
-    function handlePriceChange(event){
+    function handlePriceChange(event)
+    {
         const { value } = event.target;
         setPrice(value);
     }
 
-    async function handleSubmit(event) {
+    async function handleSubmit(event)
+    {
         event.preventDefault();
         const data = {
             automobile: auto,
@@ -51,53 +56,25 @@ function SaleForm({ fetchSaleList }) {
             }
         };
         const res = await fetch(automobileUrl, updateConfig);
-        if (res.ok) {
+        if (res.ok)
+        {
             console.log('it works!')
-        } else {
+        } else
+        {
             console.error('try again noob')
         }
         const response = await fetch(saleUrl, fetchConfig);
-        if (response.ok){
-                setAuto('');
-                setSalesperson('');
-                setCustomer('');
-                setPrice('');
-                fetchSaleList();
-                fetchAutos();
-            }
-        }
-
-        // const updateSoldStatus = await `http://localhost:8100/api/automobiles/${auto}/`;
-        // const newStatus = {
-        //     sold: true,
-        // }
-
-        // const updateConfig = {
-        //     method: 'put',
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // };
-        // const automobileUpdateUrl = `http://localhost:8100/api/automobiles/${auto}`;
-        // const updateSoldStatus = await fetch(automobileUpdateUrl, updateConfig);
-        // if (updateSoldStatus.ok) {
-        //     const updateAutomobileStatus = await updateSoldStatus.json();
-        // } else {
-        //     console.error("Unable to update sold status")
-        // }
-
-
-
-    const fetchAutos = async () =>
-    {
-        const response = await fetch('http://localhost:8100/api/automobiles/');
         if (response.ok)
         {
-            const data = await response.json();
-            setAutos(data.autos);
+            setAuto('');
+            setSalesperson('');
+            setCustomer('');
+            setPrice('');
+            fetchSaleList();
+            getAutos();
         }
     }
+
     const fetchCustomers = async () =>
     {
         const response = await fetch('http://localhost:8090/api/customers/');
@@ -118,7 +95,6 @@ function SaleForm({ fetchSaleList }) {
     };
     useEffect(() =>
     {
-        fetchAutos();
         fetchCustomers();
         fetchSalespeople();
     }, []);
@@ -133,46 +109,47 @@ function SaleForm({ fetchSaleList }) {
                         <div className="mb-3">
                             <select required name="Auto" onChange={handleAutoChange} id="Auto" className="form-select" value={auto}>
                                 <option value="" > Select an unsold automobile </option>
-                                    {autos.map(auto =>
+                                {autos.map(auto =>
+                                {
+                                    if (!auto.sold)
                                     {
-                                        if (!auto.sold)
-                                        {
-                                            return (
-                                                <option key={auto.vin} value={auto.vin} >
-                                                    {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
-                                                </option>
-                                            );
-                                        }
-                                        else {
-                                            return null;
-                                        }
-                                    })}
+                                        return (
+                                            <option key={auto.vin} value={auto.vin} >
+                                                {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
+                                            </option>
+                                        );
+                                    }
+                                    else
+                                    {
+                                        return null;
+                                    }
+                                })}
                             </select>
                         </div>
                         <div className="mb-3">
                             <select required name="Salesperson" onChange={handleSalespersonChange} id="Salesperson" className="form-select" value={salesperson}>
                                 <option value=""> Select a salesperson </option>
                                 {salespeople.map(salesperson =>
-                                    {
-                                        return (
-                                            <option key={salesperson.id} value={salesperson.id}>
-                                                {salesperson.first_name} {salesperson.last_name} {salesperson.employee_id}
-                                            </option>
-                                        )
-                                    })}
+                                {
+                                    return (
+                                        <option key={salesperson.id} value={salesperson.id}>
+                                            {salesperson.first_name} {salesperson.last_name} {salesperson.employee_id}
+                                        </option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div className="mb-3">
                             <select required name="Customer" onChange={handleCustomerChange} id="Customer" className="form-select" value={customer}>
                                 <option value=""> Select a customer </option>
                                 {customers.map(customer =>
-                                    {
-                                        return (
-                                            <option key={customer.id} value={customer.id} >
-                                                {customer.first_name} {customer.last_name} {customer.address} {customer.phone_number}
-                                            </option>
-                                        )
-                                    })}
+                                {
+                                    return (
+                                        <option key={customer.id} value={customer.id} >
+                                            {customer.first_name} {customer.last_name} {customer.address} {customer.phone_number}
+                                        </option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div className="form-floating mb-3">
