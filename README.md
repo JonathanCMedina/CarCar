@@ -19,8 +19,6 @@ Front-end is presented through a SPA(single-page application) using React. Boots
 * Docker desktop (to create volumes, images, and containers to run the application)
 * Insomnia (to test back-end functionality)
 * A web-based browser (preferrably Google Chrome) 
-* Internet access
-* A computer 
 
 ### Once those requirements are met:
 * Turn on Docker desktop
