@@ -40,7 +40,6 @@ Below are the URL Paths of front-end RESTful API URL patterns and their intended
 Below are the URL Paths of back-end URL RESTful API URL patterns and their intended purpose
 | URL Path                                     |                    Description                                                                               |
 | http://localhost:8080/api/technicians/       | Lists all technicians + Can also be used to POST info through a json body                                    |
-| http://localhost:8080/api/technicians/new    | Add a new technician with first name, last name, and employee ID                                             |
 | http://localhost:8080/api/technicians/<int:pk>/| Retrieves information about a specific technician given their assigned ID in the database                  |
 | http://localhost:8080/api/appointments/       | Lists active appointments with info about the customer, technician, reason, VIP status, VIN, & appt status  |
 | http://localhost:8080/api/appointments/       | Lists all active appointments + creates a new appointment                                                   |
