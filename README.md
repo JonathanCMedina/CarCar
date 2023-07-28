@@ -43,6 +43,7 @@ The structure of the API Documentation should guide you step-by-step on what nee
 ### React/Frontend URL Paths and use description for Inventory Microservice
 Below are the URL Paths of front-end RESTful API URL patterns and their intended use
 | URL Path                                  |                    Description                                                                                  |
+| ----------- | ----------- |
 | http://localhost:3000/manufacturers       | Lists all manufacturers with first name, last name, and employee ID                                             |
 | http://localhost:3000/manufacturers/new   | Add a new automobile manufacturer with the manufacturer's name                                                  |
 | http://localhost:3000/models              | Lists all automobile models with a picture example of the vehicle                                               |
@@ -53,6 +54,7 @@ Below are the URL Paths of front-end RESTful API URL patterns and their intended
 ### Backend URL Paths and use description for Inventory Microservice
 Below are the URL Paths of back-end URL RESTful API URL patterns and their intended use
 | URL Path                                     |                    Description                                                                               |
+| ----------- | ----------- |
 | http://localhost:8100/api/automobiles/       | Lists all automobiles + Can also be used to POST info through a json body                                    |
 | http://localhost:8100/api/automobiles/<str:vin>/| Can retrieve, delete, or update a specific automobile given their VIN                                     |
 | http://localhost:8100/api/manufacturers/     | Lists all manufacturers + Can also be used to POST/create a new manufacturer through a JSON body             |
@@ -63,6 +65,7 @@ Below are the URL Paths of back-end URL RESTful API URL patterns and their inten
 ### React/Frontend URL Paths and use description for Services Microservice
 Below are the URL Paths of front-end RESTful API URL patterns and their intended use
 | URL Path                                  |                    Description                                                                                  |
+| ----------- | ----------- |
 | http://localhost:3000/technicians         | Lists all technicians with first name, last name, and employee ID                                               |
 | http://localhost:3000/technicians/new     | Add a new technician with first name, last name, and employee ID                                                |
 | http://localhost:3000/appointments        | Lists active appointments with info about the customer, technician, reason, VIP status, VIN, & appt status      |
@@ -72,6 +75,7 @@ Below are the URL Paths of front-end RESTful API URL patterns and their intended
 ### Backend URL Paths and use description for Services Microservice
 Below are the URL Paths of back-end URL RESTful API URL patterns and their intended use
 | URL Path                                     |                    Description                                                                               |
+| ----------- | ----------- |
 | http://localhost:8080/api/technicians/       | Lists all technicians + Can also be used to POST info through a json body                                    |
 | http://localhost:8080/api/technicians/<int:pk>/| Retrieves information about a specific technician given their assigned ID in the database                  |
 | http://localhost:8080/api/appointments/      | Lists active appointments with info about the customer, technician, reason, VIP status, VIN, & appt status   |
@@ -83,6 +87,7 @@ Below are the URL Paths of back-end URL RESTful API URL patterns and their inten
 ### React/Frontend URL Paths and use description for the Sales Microservice
 Below are the URL Paths of front-end RESTful API URL patterns and their intended use
 | URL Path                                  |                    Description                                                                                  |
+| ----------- | ----------- |
 | http://localhost:3000/salespeople         | Lists all salespeople with first name, last name, and employee ID                                               |
 | http://localhost:3000/salespeople/new     | Create a new salesperson with first name, last name, and employee ID                                            |
 | http://localhost:3000/customers           | Lists all customers with first name, last name, address, and phone number                                       |
@@ -93,8 +98,9 @@ Below are the URL Paths of front-end RESTful API URL patterns and their intended
 ### Backend URL Paths and use description for the Sales Microservice
 Below are the URL Paths of back-end URL RESTful API URL patterns and their intended use
 | URL Path                                      |                Description                                                                                  |
+| ----------- | ----------- |
 | http://localhost:8090/api/salespeople/        | Lists all salespeople + Can also be used to POST/create info through a json body                            |
-| http://localhost:8090/api/salespeople/<int:pk>/| Used to delete a specific salesperson given their database ID                                              |
+| http://localhost:8090/api/salespeople/<int:pk>/ | Used to delete a specific salesperson given their database ID                                              |
 | http://localhost:8090/api/customers/          | Lists all customers and can be used to POST/create info through a json body                                 |
 | http://localhost:8090/api/customers/<int:pk>/ | Used to delete a specific customer given its database ID                                                    |
 | http://localhost:8090/api/sales/              | Lists all info about sales made. Has all information about automobiles, customers, salespeople, and price   |
