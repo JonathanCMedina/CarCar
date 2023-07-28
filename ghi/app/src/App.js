@@ -98,37 +98,46 @@ function App()
     }
   }
 
-  async function fetchSaleList() {
-      const response = await fetch('http://localhost:8090/api/sales/');
-      // if (!response.ok){
-      //     setSales([]);
-      //     return;
-      // }
-      if (response.ok) {
+  async function fetchSaleList()
+  {
+    const response = await fetch('http://localhost:8090/api/sales/');
+    // if (!response.ok){
+    //     setSales([]);
+    //     return;
+    // }
+    if (response.ok)
+    {
       const saleListData = await response.json();
       setSales(saleListData.sales)
-      } else {
-        console.error('Error fetching sale list data')
-      }
+    } else
+    {
+      console.error('Error fetching sale list data')
+    }
   }
-  async function fetchSalespeople() {
+  async function fetchSalespeople()
+  {
     const response = await fetch('http://localhost:8090/api/salespeople/');
-    if (response.ok){
+    if (response.ok)
+    {
       const salespersonListData = await response.json();
       setSalesperson(salespersonListData.salespeople)
-    } else {
+    } else
+    {
       console.error('Error fetching salespeople data')
     }
   }
-  async function fetchCustomers() {
+  async function fetchCustomers()
+  {
     const response = await fetch('http://localhost:8090/api/customers/');
-    if (response.ok){
+    if (response.ok)
+    {
       const customerListData = await response.json();
       setCustomer(customerListData.customers)
-    } else {
+    } else
+    {
       console.error('Error fetching customer data')
     }
-    }
+  }
 
 
   useEffect(() =>
@@ -180,7 +189,7 @@ function App()
           </Route>
           <Route path="sales/">
             <Route index element={<SalesList sales={sales} />} />
-            <Route path="new" element={<SaleForm fetchSaleList={fetchSaleList } />} />
+            <Route path="new" element={<SaleForm fetchSaleList={fetchSaleList} getAutos={getAutos} autos={autos} />} />
           </Route>
         </Routes>
       </div>

@@ -1,25 +1,4 @@
-import { useState, useEffect } from 'react';
-
-function AutomobileList() {
-    const [autos, setAutos] = useState([]);
-
-    async function getAutos() {
-        console.log('starting fetch');
-        const url = "http://localhost:8100/api/automobiles/";
-        const response = await fetch(url)
-        if (response.ok) {
-            const data = await response.json();
-            setAutos(data.autos);
-            console.log('fetched the autos');
-        } else {
-            console.error('An error has occurred fetching the data')
-        }
-    }
-
-    useEffect(() => {
-        getAutos();
-    }, [])
-
+function AutomobileList({ autos }) {
     return (
         <>
             <h2 className="mt-4">Automobiles</h2>
